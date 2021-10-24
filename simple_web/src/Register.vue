@@ -12,7 +12,8 @@
   </div>
 </template>
 <script>
-import firebase from 'firebase/compat/app'; //v9
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
 import router from "./main";
 export default {
     name: "register",
@@ -27,12 +28,16 @@ export default {
     methods: {
         
         Register() {
-            
-            console.log(this.email);
-            firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+            localStorage.setItem("first_name", this.first_name);
+            localStorage.setItem("last_name", this.last_name);
+            console.log(this.first_name);
+            const auth = getAuth();
+            createUserWithEmailAndPassword(auth, this.email, this.password)
                 .then(function(response) {
                     console.log(response)
                     alert("you have created an account")
+                    localStorage.setItem("email", response.user.email)
+                    localStorage.setItem("uid", response.user.uid)
                     router.replace("/home")
                 })
                 .catch(function(err) {
