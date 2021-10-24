@@ -5,7 +5,6 @@ import Register from "./Register.vue"
 import { createWebHistory, createRouter } from 'vue-router';
 import Home from "./Home.vue";
 import firebase from 'firebase/compat/app'; //v9
-
 const routes = [
     {
         path: "/",

@@ -1,5 +1,7 @@
 <template>
   <div class="register">
+      <input v-model="first_name" type="text" placeholder="first  name"><br>
+      <input v-model="last_name" type="text" placeholder="last name"><br>
       <input v-model="email" type="email" placeholder="email">
       <br>
       <input v-model="password" type="password" placeholder="password">
@@ -12,18 +14,20 @@
 <script>
 import firebase from 'firebase/compat/app'; //v9
 import router from "./main";
-require('firebase/auth');
 export default {
     name: "register",
     data() {
         return {
             email: "",
-            password: ""
+            password: "",
+            first_name: "",
+            last_name: ""
         };
     },
     methods: {
         
         Register() {
+            
             console.log(this.email);
             firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
                 .then(function(response) {
